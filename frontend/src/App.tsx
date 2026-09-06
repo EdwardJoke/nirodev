@@ -88,6 +88,8 @@ const genie = (key: string, title: string) => ({
   'data-genie-title': title,
 })
 
+const basename = import.meta.env.BASE_URL.replace(/\/+$/, '') || '/'
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<AnimatedRoutes />}>
@@ -128,7 +130,8 @@ const router = createBrowserRouter(
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" {...genie('NotFound', 'Not Found — Daily Tech News')} lazy={notFoundLazy} />
     </Route>
-  )
+  ),
+  { basename }
 )
 
 /**

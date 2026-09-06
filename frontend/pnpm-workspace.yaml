@@ -1,1 +1,6 @@
+allowBuilds:
+  '@swc/core': true
+  '@vgpu/adapter-node': true
+  esbuild: true
+  webgpu: true
 neverBuiltDependencies: []
