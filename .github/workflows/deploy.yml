@@ -1,0 +1,93 @@
+name: Deploy to GitHub Pages
+
+# Triggered by the daily digest workflow requesting a deploy, by a code push,
+# or by hand. The nightly schedule is a safety net: should the handover or a
+# push-triggered run be missed, the site still picks up the latest issue.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'frontend/**'
+      - 'backend/scripts/**'
+      - 'backend/src/**'
+      - 'scripts/**'
+      - '.github/workflows/deploy.yml'
+  # 16:25 UTC == 00:25 Asia/Shanghai, after the nightly issue is written.
+  schedule:
+    - cron: '25 16 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install backend dependencies
+        run: cd backend && pnpm install --no-frozen-lockfile
+
+      - name: Validate the archive
+        env:
+          CONTENT_DIR: ${{ github.workspace }}/content
+        run: cd backend && pnpm verify
+
+      - name: Compile the MDX archive into static JSON
+        env:
+          CONTENT_DIR: ${{ github.workspace }}/content
+        run: cd backend && pnpm build:static
+
+      - name: Install frontend dependencies
+        run: cd frontend && pnpm install --no-frozen-lockfile
+
+      - name: Resolve the public base path
+        run: |
+          if [ "${{ github.repository_owner }}" = "${{ github.event.repository.name }}" ]; then
+            echo "VITE_BASE=/" >> "$GITHUB_ENV"
+          else
+            echo "VITE_BASE=/${{ github.event.repository.name }}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build the site
+        env:
+          SITE_ORIGIN: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: cd frontend && pnpm build:pages
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

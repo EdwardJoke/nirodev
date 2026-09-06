@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Tech News — Yesterday in Tech, Every Morning</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="description"
+      content="Daily Tech News summarises what moved in technology yesterday. A new issue is written every night at midnight and archived forever."
+    />
+    <meta name="author" content="Daily Tech News" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Daily Tech News — Yesterday in Tech, Every Morning" />
+    <meta
+      property="og:description"
+      content="A daily digest of technology news, written every night at midnight and archived forever."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      // Apply the stored theme before first paint to avoid a flash.
+      (function () {
+        try {
+          var stored = localStorage.getItem('dtn-theme');
+          var dark =
+            stored === 'dark' ||
+            (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (e) {}
+      })();
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Periodical",
+        "name": "Daily Tech News",
+        "description": "A daily digest of technology news, published every night at midnight.",
+        "inLanguage": "en",
+        "publisher": { "@type": "Organization", "name": "Daily Tech News" }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

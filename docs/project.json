@@ -1,0 +1,8 @@
+{
+  "project_type": "web",
+  "sub_project_type": "",
+  "name": "Daily Tech News",
+  "app_slug": "daily-tech-news",
+  "version_description": "Fix shader texelSize and verify real WebGPU rendering",
+  "preview_type": "pc"
+}

@@ -1,0 +1,1111 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   Daily Tech News — monochrome editorial design system
+   Display: Recursive (Arrowtype)   Body: Golos UI
+   Mono:    Recursive MONO axis     Accent mono: Geist Pixel Square
+   ============================================================ */
+
+:root {
+  /* Recursive ships as two baked families rather than one axis-rich file:
+     the display voice is proportional, the mono voice is true monospace.
+     See styles/fonts.css for how each is built. */
+  --type-display: "Recursive Display", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Helvetica, Arial, sans-serif;
+  --type-body: "Golos UI", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica,
+    Arial, sans-serif;
+  --type-mono: "Recursive Mono", ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Consolas,
+    monospace;
+  --type-pixel: "Geist Pixel Square", ui-monospace, monospace;
+
+  /* `wght` set through font-variation-settings takes precedence over
+     font-weight, so the design system's weights live here. The mono family is
+     static, so this only affects the display family. */
+  --vs-display: "wght" 540;
+  --vs-display-strong: "wght" 720;
+  --vs-mono: "wght" 500;
+}
+
+@theme inline {
+  /* === 圆角 === */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* === 字体族 === */
+  --font-sans: var(--type-body);
+  --font-serif: var(--type-display);
+  --font-mono: var(--type-mono);
+  --font-pixel: var(--type-pixel);
+
+  /* === 核心颜色 === */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  /* 强调墨色：只给数字、数据标记和焦点环使用。 */
+  --color-accent-ink: var(--accent-ink);
+
+  /* === 功能颜色 === */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* === 主题特色颜色 === */
+  --color-theme-red: var(--theme-red);
+  --color-theme-green: var(--theme-green);
+  --color-theme-gold: var(--theme-gold);
+  --color-theme-blue: var(--theme-blue);
+
+  /* === 图表颜色 === */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* === 侧边栏颜色 === */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* === Hero 区域颜色 === */
+  --color-hero: var(--hero);
+  --color-hero-foreground: var(--hero-foreground);
+
+  /* === 阴影 === */
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
+  --shadow-xl: var(--ds-shadow-xl);
+}
+
+:root {
+  /* === 圆角基准值 ===
+     圆润但克制：结构线保持锐利，圆只出现在可触摸的元素上——
+     胶囊标签、按钮、卡片悬浮块、图表条。 */
+  --radius: 0.625rem;
+
+  /* === 字体排版 === */
+  --font-size-display: 3.5rem;
+  --font-size-headline: 2rem;
+  --font-size-title: 1.5rem;
+  --font-size-body: 1rem;
+  --font-size-label: 0.875rem;
+  --font-size-small: 0.75rem;
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --line-height: 1.6;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+
+  /* === 间距系统 ===
+     刻度取 1 / 2 / 3 / 5 —— 间距标度只由这四个数派生，
+     再加两级"留白带"用于章节之间。 */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 3rem;
+  --space-10: 5rem;
+  --void-md: 5rem;
+  --void-lg: 7rem;
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* === 阴影层级 === */
+  --ds-shadow-sm: 0 1px 2px oklch(0 0 0 / 0.06);
+  --ds-shadow-md: 0 2px 8px oklch(0 0 0 / 0.08);
+  --ds-shadow-lg: 0 8px 24px oklch(0 0 0 / 0.1);
+  --ds-shadow-xl: 0 16px 48px oklch(0 0 0 / 0.14);
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
+  --shadow-xl: var(--ds-shadow-xl);
+
+  /* === 动效时间 === */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* === 纸张（浅色） ===
+     中性色带一点点冷色倾向（色相 258），让整页看起来是"同一种墨"
+     印出来的，而不是三个各自为政的灰。彩度低到仍然读作黑白。
+     强调色只用在数字和数据上。 */
+  --background: oklch(0.986 0.003 258);
+  --foreground: oklch(0.155 0.014 258);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.155 0.014 258);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.155 0.014 258);
+  --primary: oklch(0.155 0.014 258);
+  --primary-foreground: oklch(0.986 0.003 258);
+  --secondary: oklch(0.945 0.004 258);
+  --secondary-foreground: oklch(0.155 0.014 258);
+  --muted: oklch(0.962 0.004 258);
+  --muted-foreground: oklch(0.485 0.016 258);
+  --accent: oklch(0.93 0.01 258);
+  --accent-foreground: oklch(0.155 0.014 258);
+  --destructive: oklch(0.42 0.13 25);
+  /* 不发光的边框：半透明描边在浅底上会让发丝线发虚。 */
+  --border: oklch(0.885 0.006 258);
+  --input: oklch(0.85 0.008 258);
+  --ring: oklch(0.5 0.16 258);
+  --accent-ink: oklch(0.47 0.155 258);
+
+  /* === 功能颜色（灰阶化） === */
+  --success: oklch(0.35 0 0);
+  --success-foreground: oklch(0.985 0 0);
+  --warning: oklch(0.42 0 0);
+  --warning-foreground: oklch(0.985 0 0);
+  --info: oklch(0.4 0 0);
+  --info-foreground: oklch(0.985 0 0);
+
+  /* === 主题特色颜色（灰阶） === */
+  --theme-red: oklch(0.32 0 0);
+  --theme-green: oklch(0.42 0 0);
+  --theme-gold: oklch(0.52 0 0);
+  --theme-blue: oklch(0.3 0 0);
+
+  /* === 图表颜色（灰阶梯度） === */
+  --chart-1: oklch(0.18 0 0);
+  --chart-2: oklch(0.36 0 0);
+  --chart-3: oklch(0.54 0 0);
+  --chart-4: oklch(0.7 0 0);
+  --chart-5: oklch(0.86 0 0);
+
+  /* === 侧边栏 === */
+  --sidebar: oklch(0.97 0 0);
+  --sidebar-foreground: oklch(0.13 0 0);
+  --sidebar-primary: oklch(0.13 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.92 0 0);
+  --sidebar-accent-foreground: oklch(0.13 0 0);
+  --sidebar-border: oklch(0.86 0 0);
+  --sidebar-ring: oklch(0.3 0 0);
+
+  /* === Hero 区域（反白） === */
+  --hero: oklch(0.13 0 0);
+  --hero-foreground: oklch(0.985 0 0);
+}
+
+.dark {
+  /* === 阴影层级 (深色模式) === */
+  --ds-shadow-sm: 0 1px 2px oklch(0 0 0 / 0.5);
+  --ds-shadow-md: 0 2px 8px oklch(0 0 0 / 0.55);
+  --ds-shadow-lg: 0 8px 24px oklch(0 0 0 / 0.6);
+  --ds-shadow-xl: 0 16px 48px oklch(0 0 0 / 0.7);
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
+  --shadow-xl: var(--ds-shadow-xl);
+
+  /* === 纯黑底（同样带一点冷调） === */
+  --background: oklch(0.09 0.01 258);
+  --foreground: oklch(0.955 0.006 258);
+  --card: oklch(0.115 0.012 258);
+  --card-foreground: oklch(0.955 0.006 258);
+  --popover: oklch(0.115 0.012 258);
+  --popover-foreground: oklch(0.955 0.006 258);
+  --primary: oklch(0.955 0.006 258);
+  --primary-foreground: oklch(0.09 0.01 258);
+  --secondary: oklch(0.175 0.012 258);
+  --secondary-foreground: oklch(0.955 0.006 258);
+  --muted: oklch(0.145 0.012 258);
+  --muted-foreground: oklch(0.685 0.016 258);
+  --accent: oklch(0.19 0.014 258);
+  --accent-foreground: oklch(0.955 0.006 258);
+  --destructive: oklch(0.72 0.15 25);
+  /* 同样是实色。半透明描边叠在不同底色上会出现深浅不一的接缝。 */
+  --border: oklch(0.25 0.012 258);
+  --input: oklch(0.33 0.014 258);
+  --ring: oklch(0.78 0.12 258);
+  --accent-ink: oklch(0.78 0.12 258);
+
+  /* === 功能颜色 (深色模式) === */
+  --success: oklch(0.8 0 0);
+  --success-foreground: oklch(0.07 0 0);
+  --warning: oklch(0.86 0 0);
+  --warning-foreground: oklch(0.07 0 0);
+  --info: oklch(0.84 0 0);
+  --info-foreground: oklch(0.07 0 0);
+
+  /* === 主题特色颜色 (深色模式) === */
+  --theme-red: oklch(0.78 0 0);
+  --theme-green: oklch(0.82 0 0);
+  --theme-gold: oklch(0.86 0 0);
+  --theme-blue: oklch(0.8 0 0);
+
+  /* === 图表颜色 (深色模式) === */
+  --chart-1: oklch(0.96 0 0);
+  --chart-2: oklch(0.78 0 0);
+  --chart-3: oklch(0.6 0 0);
+  --chart-4: oklch(0.42 0 0);
+  --chart-5: oklch(0.26 0 0);
+
+  /* === 侧边栏 (深色模式) === */
+  --sidebar: oklch(0.1 0 0);
+  --sidebar-foreground: oklch(0.96 0 0);
+  --sidebar-primary: oklch(0.96 0 0);
+  --sidebar-primary-foreground: oklch(0.07 0 0);
+  --sidebar-accent: oklch(0.18 0 0);
+  --sidebar-accent-foreground: oklch(0.96 0 0);
+  --sidebar-border: oklch(1 0 0 / 14%);
+  --sidebar-ring: oklch(0.75 0 0);
+
+  /* === Hero 区域 (深色模式) === */
+  --hero: oklch(0.14 0 0);
+  --hero-foreground: oklch(0.96 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  /* The mono family is already monospace; the setting keeps weight explicit. */
+  .font-mono {
+    font-variation-settings: var(--vs-mono);
+  }
+}
+
+/* Tailwind v4: container no longer auto-centers. Restore v3 behavior. */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1536px) {
+    max-width: 1536px;
+  }
+}
+
+/* ================================================================
+   编辑式栅格 — 八栏，左起点。页面不做居中对称：
+   正文占左五栏，元信息挂到第七、八栏，右侧刻意留空。
+   ================================================================ */
+@utility grid-editorial {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--space-2);
+
+  @media (width >= 768px) {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    column-gap: var(--space-3);
+  }
+}
+
+/* 数字的统一长相：等宽、表格数字、强调墨色。 */
+@utility num {
+  font-family: var(--type-pixel);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--accent-ink);
+  letter-spacing: 0.02em;
+}
+
+/* 大号数字换用展示字重。像素字体放大后颗粒感太重，反而显得廉价。 */
+@utility num-lg {
+  font-family: var(--type-display);
+  font-variation-settings: var(--vs-display-strong);
+  font-weight: 720;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--accent-ink);
+  letter-spacing: -0.03em;
+}
+
+/* ================================================================
+   排版工具类
+   ================================================================ */
+
+@utility font-display {
+  font-family: var(--type-display);
+  font-variation-settings: var(--vs-display);
+  font-weight: 540;
+  letter-spacing: -0.025em;
+}
+
+@utility text-kicker {
+  font-family: var(--type-mono);
+  font-variation-settings: var(--vs-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ================================================================
+   MDX 正文排版
+   ================================================================ */
+
+.dtx-body {
+  font-family: var(--type-body);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--foreground);
+}
+
+.dtx-body > * + * {
+  margin-top: 1.15em;
+}
+
+/* Shown only while the markdown renderer chunk is in flight. Three bars of
+   decreasing width read as a paragraph, so the swap is barely noticeable. */
+.dtx-prose-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.dtx-prose-skeleton > span {
+  display: block;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--foreground) 9%, transparent);
+  animation: dtx-prose-pulse 1.5s ease-in-out infinite;
+}
+
+.dtx-prose-skeleton > span:nth-child(1) {
+  width: 94%;
+}
+
+.dtx-prose-skeleton > span:nth-child(2) {
+  width: 76%;
+}
+
+.dtx-prose-skeleton > span:nth-child(3) {
+  width: 42%;
+}
+
+@keyframes dtx-prose-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dtx-prose-skeleton > span {
+    animation: none;
+  }
+}
+
+.dtx-body h2 {
+  font-family: var(--type-display);
+  font-variation-settings: var(--vs-display-strong);
+  font-weight: 720;
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin-top: 2.8em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border);
+}
+
+.dtx-body h3 {
+  font-family: var(--type-display);
+  font-variation-settings: var(--vs-display-strong);
+  font-weight: 720;
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-top: 2em;
+}
+
+.dtx-body h2 + * {
+  margin-top: 1em;
+}
+
+.dtx-body h3 + * {
+  margin-top: 0.6em;
+}
+
+.dtx-body p {
+  text-wrap: pretty;
+}
+
+.dtx-body ul,
+.dtx-body ol {
+  padding-left: 1.35em;
+}
+
+.dtx-body ul {
+  list-style: none;
+}
+
+.dtx-body ul > li {
+  position: relative;
+}
+
+.dtx-body ul > li::before {
+  content: "";
+  position: absolute;
+  left: -1.05em;
+  top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--foreground);
+}
+
+.dtx-body ol {
+  list-style: decimal;
+}
+
+.dtx-body li + li {
+  margin-top: 0.5em;
+}
+
+.dtx-body a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: opacity var(--duration-fast) var(--ease-default);
+}
+
+.dtx-body a:hover {
+  opacity: 0.6;
+}
+
+.dtx-body strong {
+  font-weight: 600;
+}
+
+.dtx-body blockquote {
+  border-left: 2px solid var(--foreground);
+  padding-left: 1em;
+  font-family: var(--type-display);
+  font-variation-settings: var(--vs-display);
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+.dtx-body code {
+  font-family: var(--type-mono);
+  font-variation-settings: var(--vs-mono);
+  font-size: 0.85em;
+  background: var(--muted);
+  padding: 0.15em 0.45em;
+  border-radius: 0.375rem;
+}
+
+.dtx-body pre {
+  font-family: var(--type-mono);
+  font-variation-settings: var(--vs-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  background: var(--muted);
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+}
+
+.dtx-body pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.dtx-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--type-mono);
+  font-variation-settings: var(--vs-mono);
+  font-size: 0.78rem;
+  letter-spacing: -0.01em;
+}
+
+.dtx-body thead th {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--foreground);
+}
+
+.dtx-body tbody td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.dtx-body tbody tr:hover td {
+  background: var(--muted);
+}
+
+.dtx-body hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2.5em 0;
+}
+
+/* ── Inline briefing disclosure (:::brief blocks) ─────────────── */
+
+.dtx-brief {
+  margin-top: 1.5em;
+}
+
+.dtx-brief-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  margin: 0;
+  padding: 0.5em 1em;
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-default),
+    background-color var(--duration-fast) var(--ease-default);
+}
+
+.dtx-brief-toggle:hover {
+  border-color: var(--foreground);
+}
+
+.dtx-brief-toggle:focus-visible {
+  outline: 1px solid var(--foreground);
+  outline-offset: 2px;
+}
+
+.dtx-brief-chevron {
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+.dtx-brief-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+/* Collapsed by default; `grid-template-rows: 0fr -> 1fr` is what animates. */
+.dtx-brief-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0.5rem;
+  transition:
+    grid-template-rows 0.28s var(--ease-default, ease),
+    opacity 0.28s var(--ease-default, ease);
+}
+
+.dtx-brief-panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.dtx-brief-panel > .dtx-brief-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.dtx-brief-inner {
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+  padding: 1.1rem 1.15rem 1.2rem;
+  background: var(--muted);
+}
+
+.dtx-brief-summary {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.dtx-brief-points {
+  margin-top: 0.95em;
+  padding-left: 1.2em;
+  list-style: none;
+  font-size: 0.92rem;
+}
+
+.dtx-brief-points > li {
+  position: relative;
+}
+
+.dtx-brief-points > li::before {
+  content: "";
+  position: absolute;
+  left: -1em;
+  top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--foreground);
+}
+
+.dtx-brief-points > li + li {
+  margin-top: 0.45em;
+}
+
+/* ================================================================
+   Motion — page enter, scroll reveal, staggered reveal.
+   All CSS, so no animation library ships to the browser.
+   ================================================================ */
+@keyframes page-enter-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes page-enter-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes page-enter-slide-fade {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+}
+
+@keyframes page-enter-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+.page-enter {
+  animation: page-enter-fade 260ms var(--ease-default, ease) both;
+}
+
+.page-enter[data-transition="slide-up"] {
+  animation-name: page-enter-slide-up;
+}
+
+.page-enter[data-transition="slide-fade"] {
+  animation-name: page-enter-slide-fade;
+}
+
+.page-enter[data-transition="scale"] {
+  animation-name: page-enter-scale;
+}
+
+/* Reveal-on-scroll, driven by `useInView` in MotionPrimitives.tsx. */
+.reveal,
+.stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s var(--ease-default, ease),
+    transform 0.6s var(--ease-default, ease);
+}
+
+.reveal.is-visible,
+.stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+.stagger.is-visible > *:nth-child(1) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 0);
+}
+.stagger.is-visible > *:nth-child(2) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 1);
+}
+.stagger.is-visible > *:nth-child(3) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 2);
+}
+.stagger.is-visible > *:nth-child(4) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 3);
+}
+.stagger.is-visible > *:nth-child(5) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 4);
+}
+.stagger.is-visible > *:nth-child(6) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 5);
+}
+.stagger.is-visible > *:nth-child(7) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 6);
+}
+.stagger.is-visible > *:nth-child(8) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 7);
+}
+.stagger.is-visible > *:nth-child(n + 9) {
+  transition-delay: calc(var(--stagger-step, 0.1s) * 8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+
+  .reveal,
+  .stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .dtx-brief-panel {
+    transition: none;
+  }
+}
+
+/* ================================================================
+   Page Transition System — uses CSS transition (NOT @keyframes)
+   to avoid onAnimationEnd bubbling issues from child elements.
+   ================================================================ */
+.page-transition {
+  transition:
+    opacity var(--duration-normal, 200ms) var(--ease-default, ease),
+    transform var(--duration-normal, 200ms) var(--ease-default, ease),
+    filter var(--duration-normal, 200ms) var(--ease-default, ease);
+}
+
+.page-transition.fade-out {
+  opacity: 0;
+}
+
+.page-transition.fade-in {
+  opacity: 1;
+}
+
+.page-transition[data-transition="slide-up"].fade-out {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.page-transition[data-transition="slide-up"].fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition[data-transition="slide-fade"].fade-out {
+  opacity: 0;
+  transform: translateX(-24px);
+}
+
+.page-transition[data-transition="slide-fade"].fade-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-transition[data-transition="blur-fade"].fade-out {
+  opacity: 0;
+  filter: blur(12px);
+}
+
+.page-transition[data-transition="blur-fade"].fade-in {
+  opacity: 1;
+  filter: blur(0px);
+}
+
+.page-transition[data-transition="scale"].fade-out {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.page-transition[data-transition="scale"].fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-transition[data-transition="bounce"] {
+  transition:
+    opacity var(--duration-normal, 200ms) var(--ease-default, ease),
+    transform var(--duration-slow, 300ms) var(--ease-bounce, cubic-bezier(0.34, 1.56, 0.64, 1)),
+    filter var(--duration-normal, 200ms) var(--ease-default, ease);
+}
+
+.page-transition[data-transition="bounce"].fade-out {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+.page-transition[data-transition="bounce"].fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-transition[data-transition="none"] {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* 全局兜底：任何未被上面列举的过渡（图表、骨架屏……）一律瞬时完成。 */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 打印与无脚本环境：显现动画永不该吞掉内容。 */
+@media print {
+  .reveal,
+  .stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ================================================================
+   View Transitions — the route change itself becomes the animation.
+   The outgoing page hands over with a soft fall, the incoming page
+   rises in, and any element carrying a shared view-transition-name
+   (a row title growing into the hero it becomes) morphs between
+   the two frames instead of being cut.
+   ================================================================ */
+
+/* Suppress the CSS-only page-enter animation where real View
+   Transitions run — `html.vt` is set in main.tsx when supported. */
+html.vt .page-enter {
+  animation: none;
+}
+
+::view-transition-old(root) {
+  animation: 200ms cubic-bezier(0.4, 0, 1, 1) both vt-root-out;
+}
+
+::view-transition-new(root) {
+  animation: 340ms cubic-bezier(0, 0, 0.2, 1) both vt-root-in;
+}
+
+@keyframes vt-root-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes vt-root-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* The tile: a list row's title grows into the hero it becomes. */
+::view-transition-group(issue-title) {
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+::view-transition-old(issue-title) {
+  animation: 240ms cubic-bezier(0.4, 0, 1, 1) both vt-tile-out;
+}
+
+::view-transition-new(issue-title) {
+  animation: 300ms 70ms cubic-bezier(0, 0, 0.2, 1) both vt-tile-in;
+}
+
+@keyframes vt-tile-out {
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+}
+
+@keyframes vt-tile-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+}
+
+/* Reorder morphs (sort, trend ranges): every paired element glides with
+   the same single easing the tile uses, so the whole page moves as one. */
+::view-transition-group(*) {
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+/* Theme toggle: the old palette stays put while the new one wipes in
+   as a circle growing from the toggle button (WAAPI animates the
+   pseudo-element from SiteHeader). */
+html.theme-vt::view-transition-old(root),
+html.theme-vt::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ================================================================
+   Shader hero fallback — 无 WebGPU 时的 CSS 几何场。
+   构图与 WGSL 版完全一致：28px 细网格、140px 主网格与十字准星、
+   45° 对角信号线、大圆盘、横扫光带。--grid-ink 是空格分隔的
+   RGB 三元组，随主题翻转；扫描带走 transform 合成器动画。
+   ================================================================ */
+
+:root {
+  --grid-ink: 15 15 15;
+}
+
+.dark {
+  --grid-ink: 240 240 240;
+}
+
+.geo-fallback {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-image:
+    radial-gradient(circle at 0 0, rgb(var(--grid-ink) / 0.55) 1.2px, transparent 1.9px),
+    repeating-linear-gradient(45deg, rgb(var(--grid-ink) / 0.09) 0 1px, transparent 1px 198px),
+    repeating-linear-gradient(0deg, rgb(var(--grid-ink) / 0.18) 0 1px, transparent 1px 140px),
+    repeating-linear-gradient(90deg, rgb(var(--grid-ink) / 0.18) 0 1px, transparent 1px 140px),
+    repeating-linear-gradient(0deg, rgb(var(--grid-ink) / 0.09) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgb(var(--grid-ink) / 0.09) 0 1px, transparent 1px 28px);
+  background-size: 140px 140px, auto, auto, auto, auto, auto;
+}
+
+/* 大圆盘：与 WGSL 的 dial 同位（72% / 44%），外环实线 + 内环虚线。 */
+.geo-fallback::after {
+  content: '';
+  position: absolute;
+  top: 44%;
+  left: 72%;
+  width: 60vmin;
+  height: 60vmin;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(var(--grid-ink) / 0.4);
+  border-radius: 9999px;
+}
+
+.geo-fallback::before {
+  content: '';
+  position: absolute;
+  top: 44%;
+  left: 72%;
+  width: 44vmin;
+  height: 44vmin;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgb(var(--grid-ink) / 0.28);
+  border-radius: 9999px;
+}
+
+/* 排版侧的纸面留白：标题压在网格上依然醒目（shader 与 CSS 兜底共用）。 */
+.geo-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--background) 88%, transparent) 0%,
+    transparent 58%
+  );
+}
+
+/* 扫描带：transform 动画留在合成器上，主线程零成本。 */
+.geo-scan {
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  left: 0;
+  width: 30vmin;
+  transform: translateX(-40vmin);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--grid-ink) / 0.12) 50%,
+    transparent
+  );
+  animation: geo-sweep 11s linear infinite;
+  will-change: transform;
+}
+
+@keyframes geo-sweep {
+  to {
+    transform: translateX(calc(100vw + 40vmin));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geo-scan {
+    animation: none;
+    opacity: 0;
+  }
+}
