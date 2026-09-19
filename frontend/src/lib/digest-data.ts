@@ -9,7 +9,12 @@ import type { Trends } from './trends'
  * `BASE_URL` is Vite's public base path — it becomes `/<repo>/` when the site
  * is served from a project subpath, which is what GitHub Pages does.
  */
-const dataUrl = (file: string) => `${import.meta.env.BASE_URL}data/${file}`
+const dataUrl = (file: string) => {
+  const base = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`
+  return `${base}data/${file}`
+}
 
 async function load<T>(file: string): Promise<T> {
   const response = await fetch(dataUrl(file))

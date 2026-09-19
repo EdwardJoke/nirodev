@@ -54,12 +54,23 @@ const routes = [
   ...digests.map((digest) => `/issue/${digest.date}`),
 ]
 const writeRoute = (route) => {
-  const target = path.join(dist, route, 'index.html')
+  const clean = route.replace(/^\/+/, '')
+  // Directory version: /archive -> dist/archive/index.html (serves /archive/).
+  const target = path.join(dist, clean, 'index.html')
   fs.mkdirSync(path.dirname(target), { recursive: true })
   fs.writeFileSync(target, indexHtml, 'utf8')
+  // Flat version: /archive -> dist/archive.html (serves /archive without a
+  // trailing slash, and covers nested routes like /issue/<date>.html).
+  // GitHub Pages looks up both `<path>.html` and `<path>/index.html`.
+  fs.writeFileSync(path.join(dist, `${clean}.html`), indexHtml, 'utf8')
 }
 
 routes.forEach(writeRoute)
+
+// Fallback for any route not known at build time (new tags, typos, future
+// issues): Pages serves 404.html while keeping the URL, so the client router
+// can render NotFound or resolve the issue instead of a blank Pages 404.
+fs.writeFileSync(path.join(dist, '404.html'), indexHtml, 'utf8')
 
 // Stop GitHub Pages from running the output through Jekyll.
 fs.writeFileSync(path.join(dist, '.nojekyll'), '')

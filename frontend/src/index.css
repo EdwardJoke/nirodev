@@ -1033,6 +1033,7 @@ html.theme-vt::view-transition-new(root) {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  pointer-events: none;
   background-image:
     radial-gradient(circle at 0 0, rgb(var(--grid-ink) / 0.55) 1.2px, transparent 1.9px),
     repeating-linear-gradient(45deg, rgb(var(--grid-ink) / 0.09) 0 1px, transparent 1px 198px),
@@ -1072,6 +1073,7 @@ html.theme-vt::view-transition-new(root) {
 .geo-veil {
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background: linear-gradient(
     100deg,
     color-mix(in srgb, var(--background) 88%, transparent) 0%,

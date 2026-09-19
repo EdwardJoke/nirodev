@@ -5,7 +5,7 @@ name: Deploy to GitHub Pages
 # push-triggered run be missed, the site still picks up the latest issue.
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - 'content/**'
       - 'frontend/**'
@@ -65,7 +65,7 @@ jobs:
           if [ "${{ github.repository_owner }}" = "${{ github.event.repository.name }}" ]; then
             echo "VITE_BASE=/" >> "$GITHUB_ENV"
           else
-            echo "VITE_BASE=/${{ github.event.repository.name }}" >> "$GITHUB_ENV"
+            echo "VITE_BASE=/${{ github.event.repository.name }}/" >> "$GITHUB_ENV"
           fi
 
       - name: Build the site

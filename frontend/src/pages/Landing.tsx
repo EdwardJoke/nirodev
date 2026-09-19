@@ -50,7 +50,7 @@ export default function Landing() {
           <ShaderHero className="absolute inset-0 h-full w-full" />
           <div className="geo-veil" aria-hidden="true" />
 
-          <div className="container w-full py-20 md:py-28">
+          <div className="container relative w-full py-20 md:py-28">
             <div className="grid-editorial">
               <div className="col-span-4 md:col-span-5">
                 <FadeIn>
